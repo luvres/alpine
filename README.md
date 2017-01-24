@@ -55,6 +55,10 @@ docker run --rm --name Lighttpd -h lighttpd \
 -v $HOME/www:/var/www \
 -ti izone/alpine:lighttpd
 ```
+##### Browser access
+```
+http://localhost/
+```
 ##### Buildin
 ```
 git clone https://github.com/luvres/alpine.git
@@ -82,6 +86,10 @@ docker run --rm --name Php -h php \
 -p 80:80 \
 -v $HOME/www:/var/www \
 -ti izone/alpine:php
+```
+##### Browser access
+```
+http://localhost/
 ```
 ##### Buildin
 ```
