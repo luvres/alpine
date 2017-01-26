@@ -1,4 +1,4 @@
-FROM alpine
+FROM izone/alpine
 MAINTAINER Leonardo Loures <luvres@hotmail.com>
 
 RUN apk --no-cache add \
