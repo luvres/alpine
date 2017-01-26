@@ -22,7 +22,7 @@ RUN apk add --no-cache \
     php5-ldap \
     php5-ctype \
     php5-dom \
-    && rm -rf /var/cache/apk/* \
+    php5-mysqli \
     && mkdir -p /run/lighttpd/ \
     && chown www-data. /run/lighttpd/
 
@@ -33,3 +33,4 @@ VOLUME /var/www
 EXPOSE 80
 
 CMD php-fpm -D && lighttpd -D -f /etc/lighttpd/lighttpd.conf
+
