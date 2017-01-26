@@ -1,5 +1,46 @@
 ## Alpine Linux
 -----
+### Latest image (Alpine Linux)
+##### Pull image
+```
+docker pull izone/alpine
+```
+##### Run pulled image
+```
+docker run --rm --name Alpine -ti izone/alpine ash
+```
+##### Buildin
+```
+git clone https://github.com/luvres/alpine.git
+cd alpine
+
+docker build -t izone/alpine .
+```
+
+### LLMP stack (Linux, Lighttpd, MariaDB, PHP5)
+##### MariaDB 10.1
+```
+docker run --name MariaDB -h mariadb \
+-p 3306:3306 \
+-e MYSQL_ROOT_PASSWORD=maria \
+-d izone/alpine:mariadb
+```
+##### PHP 5.6 and Lighttpd
+```
+mkdir $HOME/www
+
+docker run --name Php -h php \
+--link MariaDB:mariadb-host \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-d izone/alpine:php
+```
+##### Browser access
+```
+http://localhost/
+```
+
+-----
 ### MySQL (MariaDB)
 ##### Pull image
 ```
@@ -145,4 +186,54 @@ git clone https://github.com/luvres/alpine.git
 cd alpine
 
 docker build -t izone/alpine:tomcat ./tomcat/
+```
+
+### Windfly 10.1.0 Final
+##### Pull image
+```
+docker pull izone/alpine:wildfly
+```
+##### Run pulled image
+```
+docker run --rm --name Wildfly -h wildfly \
+-e PASS="admin" \
+-p 8080:8080 \
+-p 9990:9990 \
+-ti izone/alpine:wildfly
+
+docker run --name Wildfly -h wildfly \
+--link MariaDB:mariadb-host \
+-e PASS="admin" \
+-p 8080:8080 \
+-p 9990:9990 \
+-d izone/alpine:wildfly
+```
+##### Buildin
+```
+git clone https://github.com/luvres/alpine.git
+cd alpine
+
+docker build -t izone/alpine:wildfly ./wildfly/
+```
+
+-----
+### AUTO CONSTRUCTION creation sequences
+##### Base (Alpine)
+```
+docker build -t izone/alpine .
+```
+##### Databases
+```
+docker build -t izone/alpine:mariadb ./mariadb/
+```
+##### Web Servers
+```
+docker build -t izone/alpine:lighttpd ./lighttpd/ && \
+docker build -t izone/alpine:php ./php/
+```
+##### Web Servers Java
+```
+docker build -t izone/alpine:openjdk ./openjdk/ && \
+docker build -t izone/alpine:tomcat ./tomcat/ && \
+docker build -t izone/alpine:wildfly ./wildfly/
 ```
