@@ -17,7 +17,7 @@ cd alpine
 docker build -t izone/alpine .
 ```
 
-### LLMP stack (Linux, Lighttpd, MariaDB, PHP5)
+### ALMP stack (Alpine, Lighttpd, MariaDB, PHP5)
 ##### MariaDB 10.1
 ```
 docker run --name MariaDB -h mariadb \
