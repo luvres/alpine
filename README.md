@@ -40,6 +40,28 @@ docker run --name Php -h php \
 http://localhost/
 ```
 
+### phpMyAdmin
+##### Usage with linked server
+```
+docker run --rm --name Myadmin -h phpmyadmin \
+--link MariaDB:db \
+-p 8080:80 \
+-ti izone/alpine:phpmyadmin
+```
+##### Usage with external server
+```
+docker run --rm --name Myadmin -h phpmyadmin \
+-e PMA_HOST=169.8.192.130 \
+-p 8080:80 \
+-ti izone/alpine:phpmyadmin
+```
+##### Browser access
+```
+http://localhost:8080/
+```
+##### Official phpMyAdmin Docker image
+##### https://github.com/phpmyadmin/docker
+
 -----
 ### MySQL (MariaDB)
 ##### Pull image
