@@ -348,7 +348,7 @@ docker build -t izone/alpine:pgadmin ./pgadmin/
 ##### Web Servers
 ```
 docker build -t izone/alpine:lighttpd ./lighttpd/ && \
-docker build -t izone/alpine:php ./php/
+docker build -t izone/alpine:php ./php/  && \
 docker build -t izone/alpine:php7 ./php7/
 ```
 ##### Web Servers Java
