@@ -39,11 +39,11 @@ docker run --name Php -h php \
 ```
 mkdir $HOME/www
 
-docker run --name Php -h php \
+docker run --rm --name Php -h php \
 --link MariaDB:mariadb-host \
 -p 80:80 \
 -v $HOME/www:/var/www \
--d izone/alpine:php7
+-ti izone/alpine:php7
 ```
 ##### Browser access
 ```
