@@ -13,6 +13,8 @@ RUN apk add --no-cache \
     php5-cgi \
     fcgi \
     php5-pdo \
+    php5-pdo_sqlite \
+    php5-pdo_mysql \
     php5-pdo_pgsql \
     php5-soap \
     php5-xmlrpc \
