@@ -17,7 +17,7 @@ cd alpine
 docker build -t izone/alpine .
 ```
 
-### ALMP stack (Alpine, Lighttpd, MariaDB, PHP5)
+### ALMPP stack (Alpine, Lighttpd, MariaDB, Postgres, PHP)
 ##### MariaDB 10.1
 ```
 docker run --name MariaDB -h mariadb \
@@ -34,6 +34,16 @@ docker run --name Php -h php \
 -p 80:80 \
 -v $HOME/www:/var/www \
 -d izone/alpine:php
+```
+##### PHP 7 and Lighttpd
+```
+mkdir $HOME/www
+
+docker run --name Php -h php \
+--link MariaDB:mariadb-host \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-d izone/alpine:php7
 ```
 ##### Browser access
 ```
@@ -63,105 +73,6 @@ http://localhost:8080/
 ##### https://github.com/phpmyadmin/docker
 
 -----
-### MySQL (MariaDB)
-##### Pull image
-```
-docker pull izone/alpine:mariadb
-```
-##### Run pulled image
-```
-docker run --rm --name MariaDB -h mariadb \
--p 3306:3306 \
--e MYSQL_ROOT_PASSWORD=maria \
--ti izone/alpine:mariadb
-
-docker run --name MariaDB -h mariadb \
--p 3306:3306 \
--e MYSQL_ROOT_PASSWORD=maria \
--d izone/alpine:mariadb
-
-docker logs -f MariaDB
-
-docker exec -ti MariaDB mysql -u root -pmaria
-
-CREATE DATABASE dbzone;
-CREATE USER 'luvres'@'%' IDENTIFIED BY 'pass';
-GRANT ALL PRIVILEGES ON dbzone.* TO 'luvres'@'%' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
--- -------------
-DROP USER luvres;
-mysql --user=luvres --password=p4sS dbzone
-mysql -u luvres -pp4sS dbzone
-select user, host from mysql.user;
-SHOW GRANTS FOR usuario;
-select user();
-```
-##### Buildin
-```
-git clone https://github.com/luvres/alpine.git
-cd alpine
-
-docker build -t izone/alpine:mariadb ./mariadb/
-```
-
-### Lighttpd
-##### Pull image
-```
-docker pull izone/alpine:lighttpd
-```
-##### Run pulled image
-```
-mkdir $HOME/www
-
-docker run --rm --name Lighttpd -h lighttpd \
--p 80:80 \
--v $HOME/www:/var/www \
--ti izone/alpine:lighttpd
-```
-##### Browser access
-```
-http://localhost/
-```
-##### Buildin
-```
-git clone https://github.com/luvres/alpine.git
-cd alpine
-
-docker build -t izone/alpine:lighttpd ./lighttpd/
-```
-
-### PHP 5.6 and Lighttpd
-##### Pull image
-```
-docker pull izone/alpine:php
-```
-##### Run pulled image
-```
-mkdir $HOME/www
-
-docker run --rm --name Php -h php \
--p 80:80 \
--v $HOME/www:/var/www \
--ti izone/alpine:php
-
-docker run --rm --name Php -h php \
---link MariaDB:mariadb-host \
--p 80:80 \
--v $HOME/www:/var/www \
--ti izone/alpine:php
-```
-##### Browser access
-```
-http://localhost/
-```
-##### Buildin
-```
-git clone https://github.com/luvres/alpine.git
-cd alpine
-
-docker build -t izone/alpine:php ./php/
-```
-
 ### Openjdk 8
 ##### Pull image
 ```
@@ -179,7 +90,7 @@ cd alpine
 docker build -t izone/alpine:openjdk ./openjdk/
 ```
 
-### Tomcat 8.0.39
+### Tomcat 8.0.41
 ##### Pull image
 ```
 docker pull izone/alpine:tomcat
@@ -239,6 +150,187 @@ docker build -t izone/alpine:wildfly ./wildfly/
 ```
 
 -----
+### MySQL (MariaDB)
+##### Pull image
+```
+docker pull izone/alpine:mariadb
+```
+##### Run pulled image
+```
+docker run --rm --name MariaDB -h mariadb \
+-p 3306:3306 \
+-e MYSQL_ROOT_PASSWORD=maria \
+-ti izone/alpine:mariadb
+
+docker run --name MariaDB -h mariadb \
+-p 3306:3306 \
+-e MYSQL_ROOT_PASSWORD=maria \
+-d izone/alpine:mariadb
+
+docker logs -f MariaDB
+
+docker exec -ti MariaDB mysql -u root -pmaria
+
+CREATE DATABASE dbzone;
+CREATE USER 'luvres'@'%' IDENTIFIED BY 'pass';
+GRANT ALL PRIVILEGES ON dbzone.* TO 'luvres'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+-- -------------
+DROP USER luvres;
+mysql --user=luvres --password=p4sS dbzone
+mysql -u luvres -pp4sS dbzone
+select user, host from mysql.user;
+SHOW GRANTS FOR usuario;
+select user();
+```
+##### Buildin
+```
+git clone https://github.com/luvres/alpine.git
+cd alpine
+
+docker build -t izone/alpine:mariadb ./mariadb/
+```
+
+### Postgres 9.5.5
+##### Pull image
+```
+docker pull izone/alpine:postgres
+```
+
+##### Run pulled image
+```
+docker run --name Postgres -h postgres \
+-p 5432:5432 \
+-e POSTGRES_PASSWORD=postgres \
+-d izone/alpine:postgres
+
+docker logs -f Postgres
+
+docker exec -ti Postgres bash -c "su postgres"
+
+createdb dbzone
+psql -U postgres
+create user luvres with password 'pass';
+alter database dbzone owner to luvres;
+---------------
+alter user luvres password 'p4sS';
+drop user luvres;
+\du
+```
+##### Buildin
+```
+git clone https://github.com/luvres/alpine.git
+cd alpine
+
+docker build -t izone/alpine:postgres ./postgres/
+```
+### pgAdmin
+```
+docker run -ti --name PgAdmin -h pgadmin \
+--link Postgres:postgres \
+-p 5050:5050 \
+-ti izone/alpine:pgadmin
+```
+##### Browser access
+```
+http://localhost:5050/
+```
+##### Buildin
+```
+git clone https://github.com/luvres/alpine.git
+cd alpine
+
+docker build -t izone/alpine:pgadmin ./pgadmin/
+```
+##### References
+##### https://github.com/docker-library/python
+##### https://github.com/fenglc/dockercloud-pgAdmin4
+
+
+### Lighttpd
+##### Pull image
+```
+docker pull izone/alpine:lighttpd
+```
+##### Run pulled image
+```
+mkdir $HOME/www
+
+docker run --rm --name Lighttpd -h lighttpd \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-ti izone/alpine:lighttpd
+```
+##### Browser access
+```
+http://localhost/
+```
+##### Buildin
+```
+git clone https://github.com/luvres/alpine.git
+cd alpine
+
+docker build -t izone/alpine:lighttpd ./lighttpd/
+```
+
+### PHP 5.6 and Lighttpd
+##### Pull image
+```
+docker pull izone/alpine:php
+```
+##### Run pulled image
+```
+mkdir $HOME/www
+
+docker run --rm --name Php -h php \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-ti izone/alpine:php
+
+docker run --rm --name Php -h php \
+--link MariaDB:mariadb-host \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-ti izone/alpine:php
+```
+### PHP 7 and Lighttpd
+##### Pull image
+```
+docker pull izone/alpine:php7
+```
+##### Run pulled image
+```
+mkdir $HOME/www
+
+docker run --rm --name Php -h php \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-ti izone/alpine:php7
+
+docker run --rm --name Php -h php \
+--link MariaDB:mariadb-host \
+--link Postgres:postgres-host \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-ti izone/alpine:php7
+```
+##### Browser access
+```
+http://localhost/
+```
+##### Buildin
+```
+git clone https://github.com/luvres/alpine.git
+cd alpine
+
+docker build -t izone/alpine:php ./php/
+
+docker build -t izone/alpine:php7 ./php7/
+```
+
+
+
+-----
 ### AUTO CONSTRUCTION creation sequences
 ##### Base (Alpine)
 ```
@@ -246,12 +338,19 @@ docker build -t izone/alpine .
 ```
 ##### Databases
 ```
-docker build -t izone/alpine:mariadb ./mariadb/
+docker build -t izone/alpine:mariadb ./mariadb/ && \
+docekr build -t izone/alpine:phpmyadmin ./phpmyadmin/
+
+docker build -t izone/alpine:postgres ./postgres/ && \
+docker build -t izone/alpine:python2 ./python2/ && \
+docker build -t izone/alpine:python3 ./python3/ && \
+docker build -t izone/alpine:pgadmin ./pgadmin/
 ```
 ##### Web Servers
 ```
 docker build -t izone/alpine:lighttpd ./lighttpd/ && \
 docker build -t izone/alpine:php ./php/
+docker build -t izone/alpine:php7 ./php7/
 ```
 ##### Web Servers Java
 ```
