@@ -340,6 +340,8 @@ docker build -t izone/alpine .
 ##### Databases
 ```
 docker build -t izone/alpine:mariadb ./mariadb/ && \
+docker build -t izone/alpine:maria55 ./mariadb/5.5/ && \
+docker build -t izone/alpine:maria101 ./mariadb/10.1/ && \
 docker build -t izone/alpine:phpmyadmin ./phpmyadmin/
 
 docker build -t izone/alpine:python2 ./python2/ && \
