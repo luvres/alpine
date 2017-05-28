@@ -28,8 +28,8 @@ RUN apk add --no-cache \
     php7-mysqli \
   \
     && mkdir -p /run/lighttpd/ \
-    && chown www-data. /run/lighttpd/ \
-    && ln -s /usr/bin/php-cgi7 /usr/bin/php-cgi
+    && chown www-data. /run/lighttpd/
+#    && ln -s /usr/bin/php-cgi7 /usr/bin/php-cgi
 
 ADD lighttpd.conf /etc/lighttpd/lighttpd.conf
 
