@@ -1,4 +1,4 @@
-FROM izone/alpine
+FROM alpine
 MAINTAINER Leonardo Loures <luvres@hotmail.com>
 
 # ensure local python is preferred over distribution python
