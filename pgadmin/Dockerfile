@@ -1,7 +1,7 @@
 FROM python:2-alpine
 MAINTAINER Leonardo Loures <luvres@hotmail.com>
 
-COPY pgadmin4-1.3 /pgadmin4	
+COPY pgadmin4-1.2 /pgadmin4	
 
 RUN set -x \
 	&&  apk add --no-cache postgresql-libs \
@@ -9,7 +9,7 @@ RUN set -x \
 			gcc \
 			postgresql-dev \
 			musl-dev \
-	&&  pip install -r /pgadmin4/requirements.txt \
+	&&  pip install -r /pgadmin4/requirements_py2.txt \
 	&&  cd /pgadmin4/web/ \
 	&&  cp config.py config_local.py \
 	&&  sed -i "s/SERVER_MODE = True/SERVER_MODE = False/g" config_local.py \
