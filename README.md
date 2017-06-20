@@ -33,9 +33,9 @@ docker run --name Php -h php \
 --link MariaDB:mariadb-host \
 -p 80:80 \
 -v $HOME/www:/var/www \
--d izone/alpine:php
+-d izone/alpine:php5
 ```
-##### PHP 7 and Lighttpd
+##### PHP 7.1 and Lighttpd
 ```
 mkdir $HOME/www
 
@@ -44,7 +44,7 @@ docker run --rm --name Php -h php \
 --link Postgres:postgres-host \
 -p 80:80 \
 -v $HOME/www:/var/www \
--ti izone/alpine:php7
+-ti izone/alpine:php
 ```
 ##### Browser access
 ```
@@ -277,6 +277,26 @@ docker build -t izone/alpine:lighttpd ./lighttpd/
 ### PHP 5.6 and Lighttpd
 ##### Pull image
 ```
+docker pull izone/alpine:php5
+```
+##### Run pulled image
+```
+mkdir $HOME/www
+
+docker run --rm --name Php -h php \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-ti izone/alpine:php5
+
+docker run --rm --name Php -h php \
+--link MariaDB:mariadb-host \
+-p 80:80 \
+-v $HOME/www:/var/www \
+-ti izone/alpine:php5
+```
+### PHP 7.1 and Lighttpd
+##### Pull image
+```
 docker pull izone/alpine:php
 ```
 ##### Run pulled image
@@ -290,30 +310,10 @@ docker run --rm --name Php -h php \
 
 docker run --rm --name Php -h php \
 --link MariaDB:mariadb-host \
--p 80:80 \
--v $HOME/www:/var/www \
--ti izone/alpine:php
-```
-### PHP 7 and Lighttpd
-##### Pull image
-```
-docker pull izone/alpine:php7
-```
-##### Run pulled image
-```
-mkdir $HOME/www
-
-docker run --rm --name Php -h php \
--p 80:80 \
--v $HOME/www:/var/www \
--ti izone/alpine:php7
-
-docker run --rm --name Php -h php \
---link MariaDB:mariadb-host \
 --link Postgres:postgres-host \
 -p 80:80 \
 -v $HOME/www:/var/www \
--ti izone/alpine:php7
+-ti izone/alpine:php
 ```
 ##### Browser access
 ```
@@ -324,9 +324,9 @@ http://localhost/
 git clone https://github.com/luvres/alpine.git
 cd alpine
 
-docker build -t izone/alpine:php ./php/
+docker build -t izone/alpine:php5 ./php5/
 
-docker build -t izone/alpine:php7 ./php7/
+docker build -t izone/alpine:php ./php/
 ```
 
 
@@ -349,8 +349,8 @@ docker build -t izone/alpine:pgadmin ./pgadmin/
 ##### Web Servers
 ```
 docker build -t izone/alpine:lighttpd ./lighttpd/ && \
-docker build -t izone/alpine:php ./php/  && \
-docker build -t izone/alpine:php7 ./php7/
+docker build -t izone/alpine:php5 ./php5/  && \
+docker build -t izone/alpine:php ./php/
 ```
 ##### Web Servers Java
 ```
