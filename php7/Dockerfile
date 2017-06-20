@@ -26,7 +26,17 @@ RUN apk add --no-cache \
     php7-ctype \
     php7-dom \
     php7-mysqli \
+    php7-session \
+    php7-openssl \
     php7-mbstring \
+    php7-odbc \
+    php7-pdo_odbc \
+    php7-zip \
+    php7-bz2 \
+    php7-sqlite3 \
+    php7-bcmath \
+    php7-xmlreader \
+    php7-pdo_dblib \
   \
     && mkdir -p /run/lighttpd/ \
     && chown www-data. /run/lighttpd/
