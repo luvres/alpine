@@ -203,7 +203,7 @@ docker pull izone/alpine:postgres
 docker run --name Postgres -h postgres \
 -p 5432:5432 \
 -e POSTGRES_PASSWORD=postgres \
--d izone/alpine:postgres
+-d postgres:alpine
 
 docker logs -f Postgres
 
@@ -343,8 +343,6 @@ docker build -t izone/alpine .
 ```
 docker build -t izone/alpine:mariadb ./mariadb/ && \
 docker build -t izone/alpine:phpmyadmin ./phpmyadmin/
-
-docker build -t izone/alpine:postgres ./postgres/
 
 docker build -t izone/alpine:python2 ./python2/ && \
 docker build -t izone/alpine:python3 ./python3/ && \
