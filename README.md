@@ -207,8 +207,6 @@ docker run --name Postgres -h postgres \
 
 docker logs -f Postgres
 
-docker exec -ti Postgres psql -U postgres -c "SELECT version();"
-
 docker exec -ti Postgres bash -c "su postgres"
 
 createdb dbzone
@@ -220,6 +218,12 @@ alter user luvres password 'p4sS';
 drop user luvres;
 \du
 ```
+
+##### Postgres Version
+```
+docker exec -ti Postgres psql -U postgres -c "SELECT version();"
+```
+
 ##### Buildin
 ```
 git clone https://github.com/luvres/alpine.git
