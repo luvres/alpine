@@ -344,6 +344,8 @@ docker build -t izone/alpine .
 docker build -t izone/alpine:mariadb ./mariadb/ && \
 docker build -t izone/alpine:phpmyadmin ./phpmyadmin/
 
+docker build -t izone/alpine:postgres ./postgres/
+
 docker build -t izone/alpine:python2 ./python2/ && \
 docker build -t izone/alpine:python3 ./python3/ && \
 docker build -t izone/alpine:pgadmin ./pgadmin/
