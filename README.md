@@ -192,7 +192,7 @@ cd alpine
 docker build -t izone/alpine:mariadb ./mariadb/
 ```
 
-### Postgres 9.5.5
+### Postgres 9.6.3
 ##### Pull image
 ```
 docker pull izone/alpine:postgres
