@@ -204,11 +204,17 @@ docker run --name Postgres -h postgres \
 -p 5432:5432 \
 -e POSTGRES_PASSWORD=postgres \
 -d postgres:alpine
+```
 
+```
 docker logs -f Postgres
+```
 
+```
 docker exec -ti Postgres bash -c "su postgres"
+```
 
+```
 createdb dbzone
 psql -U postgres
 create user luvres with password 'pass';
