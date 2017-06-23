@@ -1,5 +1,4 @@
 FROM python:3-alpine
-
 MAINTAINER luvres <luvres@hotmail.com>
 
 ENV LANG en_US.utf8
