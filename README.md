@@ -248,6 +248,12 @@ docker run --rm --name PgAdmin -h pgadmin \
 ```
 http://localhost:5050/
 ```
+
+```
+login: pgadmin
+password: pgadmin
+```
+
 ##### Buildin
 ```
 git clone https://github.com/luvres/alpine.git
