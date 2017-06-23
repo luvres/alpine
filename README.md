@@ -244,7 +244,7 @@ docker run --rm --name PgAdmin -h pgadmin \
 -p 5050:5050 \
 -ti izone/alpine:pgadmin
 ```
-##### Browser access
+##### Browser access (Firefox)
 ```
 http://localhost:5050/
 ```
