@@ -240,7 +240,7 @@ docker build -t izone/alpine:postgres ./postgres/
 ### pgAdmin
 ```
 docker run --rm --name PgAdmin -h pgadmin \
---link Postgres:postgres \
+--link Postgres:postgres-host \
 -p 5050:5050 \
 -ti izone/alpine:pgadmin
 ```
