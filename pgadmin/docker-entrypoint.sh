@@ -30,7 +30,7 @@ if [ "$1" = 'pgadmin4' ]; then
 		cp config.py config_local.py
 		sed -i "s/DEFAULT_SERVER = 'localhost'/DEFAULT_SERVER = '0.0.0.0'/g" config_local.py
 
-		export PGADMIN_SETUP_EMAIL="luvres@hotmail.org"
+		export PGADMIN_SETUP_EMAIL="pgadmin"
 		export PGADMIN_SETUP_PASSWORD="pgadmin"
 
 		python setup.py
