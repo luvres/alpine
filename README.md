@@ -91,7 +91,7 @@ cd alpine
 docker build -t izone/alpine:openjdk ./openjdk/
 ```
 
-### Tomcat 8.0.44
+### Tomcat 8.0.45
 ##### Pull image
 ```
 docker pull izone/alpine:tomcat

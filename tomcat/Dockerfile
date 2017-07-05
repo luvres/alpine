@@ -4,7 +4,7 @@ MAINTAINER Leonardo Loures <luvres@hotmail.com>
 ENV CATALINA_HOME=/usr/local/tomcat \
     PATH=$CATALINA_HOME/bin:$PATH \
     TOMCAT_MAJOR=8 \
-    TOMCAT_VERSION=8.0.44
+    TOMCAT_VERSION=8.0.45
 ENV TOMCAT_TGZ_URL=http://ftp.unicamp.br/pub/apache/tomcat/tomcat-8/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.zip
 
 RUN apk add --no-cache wget \
