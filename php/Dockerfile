@@ -42,6 +42,12 @@ RUN apk add --no-cache \
     php7-bcmath \
     php7-xmlreader \
   \
+	php7-zlib \
+	php7-simplexml \
+	php7-fileinfo \
+	php7-tokenizer \
+	php7-intl \
+  \
     && mkdir -p /run/lighttpd/ \
     && chown www-data. /run/lighttpd/
 #    && sed -i '/session.save_path = "\/tmp"/s/;//' /etc/php7/php.ini
