@@ -49,9 +49,12 @@ RUN apk add --no-cache \
 	php7-intl \
   \
     && mkdir -p /run/lighttpd/ \
-    && chown www-data. /run/lighttpd/
+    && chown www-data. /run/lighttpd/ \
 #    && sed -i '/session.save_path = "\/tmp"/s/;//' /etc/php7/php.ini
 #    && ln -s /usr/bin/php-cgi7 /usr/bin/php-cgi
+  \
+    && mkdir /var/data \
+    && chown -R www-data:1000 /var/data
 
 ADD lighttpd.conf /etc/lighttpd/lighttpd.conf
 
