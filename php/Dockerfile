@@ -54,7 +54,9 @@ RUN apk add --no-cache \
 #    && ln -s /usr/bin/php-cgi7 /usr/bin/php-cgi
   \
     && mkdir /var/data \
-    && chown -R www-data:1000 /var/data
+    && chown -R www-data:1000 /var/data \
+    && sed -i '/upload_max_filesize/s/2/64/' /etc/php7/php.ini \
+    && sed -i '/post_max_size/s/8/64/' /etc/php7/php.ini
 
 ADD lighttpd.conf /etc/lighttpd/lighttpd.conf
 
